@@ -1,0 +1,8 @@
+setup.py
+pyBRML/__init__.py
+pyBRML/array.py
+pyBRML/potential.py
+pyBRML.egg-info/PKG-INFO
+pyBRML.egg-info/SOURCES.txt
+pyBRML.egg-info/dependency_links.txt
+pyBRML.egg-info/top_level.txt

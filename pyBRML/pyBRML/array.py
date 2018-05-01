@@ -6,11 +6,12 @@ Date: 04/12/2018
 """
 import numpy as np
 from .potential import Potential
+from . import utils
 
 # class Array(Potential):
 class Array:
-    """ Python implementation of BRML Array class using numpy
-    """
+    """ Python implementation of BRML Array class using numpy"""
+    
     def __init__(self, variables, table):
         """
         Args:
@@ -25,9 +26,9 @@ class Array:
         """
         if not isinstance(variables, list):
             raise ValueError("variables must by of type list")
+        np_table = np.asarray(table)
+        if len(variables) != utils.mysize(np_table):
+            raise ValueError("number of declared variables to the number of table dimensions")
+
         self.variables = variables
-
-        # TODO check validity of table
-        # Cast to numpy 
-        self.table = np.asarray(table)
-
+        self.table = np_table
