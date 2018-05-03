@@ -18,3 +18,8 @@ class TestArray:
     def test_variable_len_does_not_match_table_dim_raises_exception_2(self):
         with pytest.raises(ValueError):
             brml.Array(['knife','butler'],[3,5])
+
+    def test_raise_exception_if_table_not_numeric(self):
+        raise NotImplementedError
+    
+    
