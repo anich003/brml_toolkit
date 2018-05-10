@@ -1,18 +1,26 @@
 """
 Simple implementation of demoClouseau.m in python using numpy to handle broadcasting
 
-In this example, the joint probability can be modeled as a 2x2x2 tensor.
-
-Here, each dimension corresponds to a variable (knife, maid, butler) and the size 
-of the dimension correspond to the number of states each variable can take. 
-
-For example,
-     knife: {     used,     not_used } => 2 states
-      maid: { murderer, not_murderer } => 2 states
-    butler: { murderer, not_murderer } => 2 states
-
 Author: Aaron Nichols
 Date: May 3, 2018
+
+In this example, the joint probability can be modeled as a 2x2x2 tensor.
+
+Here, each dimension corresponds to a variable (knife, maid, butler) and the size
+of the dimension correspond to the number of states each variable can take.
+
+For example,
+dim    name               domain             num_states
+----------------------------------------------------------
+ 1     knife: {     used,     not_used }  =>  2 states
+ 2      maid: { murderer, not_murderer }  =>  2 states
+ 3    butler: { murderer, not_murderer }  =>  2 states
+
+When set up like this, the joint can be constructed as a simple product of all
+potentials:
+    p(K,B,M) = p(K | B,M) p(B) p(M)
+
+
 """
 import numpy as np
 
@@ -27,8 +35,10 @@ knife[1,0,1] = 0.64 #0.6
 knife[1,1,1] = 0.0 # 0.1
 knife[0,:,:] = 1 - knife[1,:,:]
 
+# p(K,B,M) = p(K|B,M) p(B) p(M)
 joint = knife * butler * maid
 
 # Set knife=1 and marginalize over maid. Normalize to knife=1
-prob = joint[1,:,1].sum() / joint[1,:,:].sum()
-print(f'prob( butler | knife ) = {prob:0.2f}')
+num = joint[1,:,1].sum()
+den = joint[1,:,:].sum()
+print(f'prob( butler | knife ) = {num/den:0.2f}')
