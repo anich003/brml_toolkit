@@ -1,0 +1,17 @@
+
+>>> s = PotentialSystem()
+>>> s.add_variable('knife',['used','not_used'])
+>>> s.add_variable('maid',['murderer','not_murderer'])
+>>> s.add_variable('butler',['murderer','not_murderer'])
+
+Adding potentials to a PotentialSystem
+>>> s.add_potential([2],[0.6, 0.4]) 
+>>> s.add_potential(1, [0.2, 0.8])
+>>> s.add_potential([1,3,2],[ ...data... ])
+
+As potentials are added each potential should be reshaped by the PotentialSystem instance,
+however this means that the user of the class will not be interacting with the same data
+structure that they input. The reshapes and transpositions could occur only when the 
+joint probability is calculated. In this case, the PotentialSystem would be responsible
+for the restructuring of the potentials, at least as far as keeping track of the current
+number of variables (dimensions) and their string identifiers.
