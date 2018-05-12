@@ -32,6 +32,8 @@ class Array:
         Raises:
             ValueError: if len(variables) does not equal np.shape(table)[0]
         """
+        if isinstance(variable_idxs, int):
+            variable_idxs = [variable_idxs]
         if not isinstance(variable_idxs, list):
             raise ValueError("variable_idxs must by of type list")
         np_table = np.asarray(table)

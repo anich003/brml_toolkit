@@ -5,10 +5,11 @@ class TestArray:
     def test_create_array_with_list(self):
         arr = Array([1,2],[[1,2,3],[4,5,6]])
 
-    def test_create_Array_with_ndarray(self):
+    def test_create_array_with_ndarray(self):
         import numpy as np
         Array([1,2], np.random.rand(2,2))
 
+    @pytest.mark.skip(reason="will convert int to list in function")
     def test_raises_an_exception_if_variable_idxs_not_list(self):
         with pytest.raises(ValueError):
             Array(1,[0.2, 0.8])
