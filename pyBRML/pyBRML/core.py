@@ -20,7 +20,7 @@ def multiply_potentials(list_of_potentials):
 
     # Collect the set of variables from each pot. Used to reshape each potential.table
     variable_set = set(var for potential in list_of_potentials for var in potential.variables)
-    variable_set = list(variable_set)
+    variable_set = sorted(list(variable_set))
 
     # Copy potentials to avoid mutating original objects
     potentials = copy.deepcopy(list_of_potentials)
@@ -30,8 +30,8 @@ def multiply_potentials(list_of_potentials):
         pot = utils.format_table(pot.variables, pot.table, variable_set)
 
     # Multiply potentials and return
-    new_potential = potentials[0]
+    new_potential = potentials[0].table
     for pot in potentials[1:]:
-        new_potential.table = new_potential.table * pot.table
+        new_potential = new_potential * pot.table
 
-    return new_potential
+    return Array(variable_set,new_potential)
