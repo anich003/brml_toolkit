@@ -41,4 +41,4 @@ joint = knife * butler * maid
 # Set knife=1 and marginalize over maid. Normalize to knife=1
 num = joint[1,:,1].sum()
 den = joint[1,:,:].sum()
-print(f'prob( butler | knife ) = {num/den:0.2f}')
+print(f'prob( butler | knife ) = {num/den:0.4f}')
